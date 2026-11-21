@@ -36,6 +36,8 @@ def validate_row(fields: list[str], airports: set[str]) -> str | None:
     flight_id , origin, destination, departure, arrival, price = fields
     if not re.fullmatch(r"[A-Za-z0-9]{2,8}", flight_id): #this is for checking flight id
         return "INVALID_FLIGHT_ID"
+    if not re.fullmatch(r"[A-Z]{3}", origin) or origin not in airports:
+        return "INVALID_ORIGIN"
     if not re.fullmatch(r"[A-Z]{3}", destination) or destination not in airports:
         return "INVALID_DESTINATION"
     if origin == destination:
